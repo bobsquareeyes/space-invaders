@@ -48,7 +48,7 @@ bullet_img = pygame.image.load('bullet.png')
 bullet_x = 0
 bullet_y = 480
 bullet_x_change = 0
-bullet_y_change = -5
+bullet_y_change = -10
 bullet_state = "ready"
 
 # Score
@@ -79,9 +79,9 @@ def fire_bullet(x,y):
     screen.blit(bullet_img,(x+16,y+10))
 
 def is_collision(enemy_x, enemy_y, bullet_x, bullet_y):
-    distance = math.sqrt(math.pow(bullet_x + 16 - enemy_x,2)
-                         + math.pow(bullet_y + 16 - enemy_y,2))
-    if distance < 27:
+    distance = math.sqrt(math.pow(bullet_x - enemy_x,2)
+                         + math.pow(bullet_y - enemy_y,2))
+    if distance < 30:
         return True
     else:
         return False
@@ -100,9 +100,9 @@ while running:
         # if keystroke is pressed, check whether it is left or right
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                player_x_change = -2
+                player_x_change = -4
             elif event.key == pygame.K_RIGHT:
-                player_x_change = 2
+                player_x_change = 4
             elif event.key == pygame.K_SPACE:
                 if bullet_state == "ready":
                     bullet_sound = mixer.Sound('laser.wav')
